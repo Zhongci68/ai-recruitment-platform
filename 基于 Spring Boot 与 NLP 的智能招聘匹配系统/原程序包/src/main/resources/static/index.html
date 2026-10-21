@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能招聘匹配系统</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<header class="topbar"></header>
+<main class="container">
+  <section class="hero">
+    <div class="hero-main">
+      <h1>智能招聘匹配系统</h1>
+      <p>支持岗位浏览、简历管理、智能推荐、投递管理、招聘者筛选和管理员数据分析。</p>
+      <div class="search-row">
+        <input id="keyword" placeholder="搜索职位、技能或地区，例如：杭州">
+        <button class="btn" onclick="goSearch()">搜索职位</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>岗位分类</h3>
+      <div id="categories" class="meta"></div>
+      <div id="categoryTitle" class="section-title hidden"><h2></h2></div>
+      <table id="categoryTable" class="table hidden">
+        <thead><tr><th>名称</th><th>薪资范围</th><th>地区</th><th>岗位数量</th><th>学历要求</th><th>操作</th></tr></thead>
+        <tbody id="categoryRows"></tbody>
+      </table>
+    </div>
+  </section>
+  <div class="section-title"><h2>热门职位</h2><a href="/rank.html">查看排行</a></div>
+  <section id="hotJobs" class="grid"></section>
+</main>
+<script src="/js/app-fixed.js"></script>
+<script>
+mountTopbar();
+async function boot() {
+  const home = await API.get("/api/public/home");
+  document.getElementById("categories").innerHTML = home.categories.map(c => `<button class="pill" onclick="loadCategory(${c.id}, '${c.name}')">${c.name}</button>`).join("");
+  document.getElementById("hotJobs").innerHTML = (home.hotJobs.length ? home.hotJobs : home.latestJobs).map(j => jobCard(j)).join("");
+}
+function goSearch() {
+  const keyword = document.getElementById("keyword").value.trim();
+  location.href = "/search.html?keyword=" + encodeURIComponent(keyword);
+}
+async function loadCategory(categoryId, name) {
+  const list = await API.get("/api/public/jobs?categoryId=" + categoryId);
+  document.querySelector("#categoryTitle h2").innerText = name + "岗位";
+  document.getElementById("categoryTitle").classList.remove("hidden");
+  document.getElementById("categoryTable").classList.remove("hidden");
+  document.getElementById("categoryRows").innerHTML = list.map(jobRow).join("");
+}
+boot();
+</script>
+</body>
+</html>

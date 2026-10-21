@@ -1,0 +1,24 @@
+﻿<!doctype html>
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司信息</title><link rel="stylesheet" href="/css/app.css"></head>
+<body>
+<header class="topbar"></header>
+<main class="layout">
+    <div id="side"></div>
+    <section class="content">
+        <h2>公司信息</h2>
+        <div class="card form-grid">
+            <input value="未来智聘科技有限公司" placeholder="公司名称">
+            <input value="互联网 / 智能招聘 / 企业服务" placeholder="行业">
+            <input value="杭州市滨江区人工智能产业园" placeholder="公司地址">
+            <input value="100-299人" placeholder="公司规模">
+            <textarea>公司专注于中小企业招聘数字化服务，提供岗位发布、简历解析、智能推荐、招聘数据分析等一体化解决方案。团队重视工程质量和数据驱动，欢迎软件工程、人工智能、数据分析方向同学加入。</textarea>
+            <button class="btn" onclick="alert('公司信息已保存')">保存</button>
+        </div>
+    </section>
+</main>
+<script src="/js/app-fixed.js"></script>
+<script>mountTopbar(); side.outerHTML = sidebar("hr","company.html");</script>
+</body>
+</html>

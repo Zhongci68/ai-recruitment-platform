@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>职位详情</title><link rel="stylesheet" href="/css/app.css"></head>
+<body>
+<header class="topbar"></header>
+<main class="container">
+  <section id="detail" class="card"></section>
+  <div class="section-title"><h2>用户评论</h2></div>
+  <section id="comments" class="grid two"></section>
+</main>
+<script src="/js/api.js"></script>
+<script>
+mountTopbar();
+const id = new URLSearchParams(location.search).get("id");
+async function boot(){
+  const data = await API.get("/api/public/jobs/" + id);
+  const j = data.job;
+  detail.innerHTML = `<h1>${j.title}</h1><div class="meta"><span>${money(j)}</span><span>${j.location}</span><span>${j.education}</span><span>岗位数量 ${j.vacancyCount}</span><span>浏览 ${j.viewCount}</span><span>评分 ${j.ratingAverage}</span></div><p>${j.description}</p><h3>任职要求</h3><p>${j.requirementsText}</p><div class="search-row"><button class="btn" onclick="applyJob()">投递简历</button><button class="btn secondary" onclick="favJob()">收藏</button><select id="score"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select><button class="btn secondary" onclick="rateJob()">评分</button></div><br><textarea id="content" placeholder="发布评论"></textarea><br><br><button class="btn secondary" onclick="commentJob()">发布评论</button>`;
+  comments.innerHTML = data.comments.map(c => `<div class="card"><strong>${c.user?.name || c.user?.account || "用户"}</strong><p>${c.content}</p><div class="meta">${fmtTime(c.createTime)}</div></div>`).join("") || "<p>暂无评论</p>";
+}
+async function needLogin(){ if(!API.user()){ location.href="/login.html"; return false; } return true; }
+async function favJob(){ if(await needLogin()){ await API.post(`/api/user/jobs/${id}/favorite`); alert("已收藏"); } }
+async function applyJob(){ if(await needLogin()){ await API.post(`/api/user/jobs/${id}/apply`); alert("投递成功"); } }
+async function rateJob(){ if(await needLogin()){ await API.post(`/api/user/jobs/${id}/rate`, {score:Number(score.value)}); alert("评分成功"); location.reload(); } }
+async function commentJob(){ if(await needLogin()){ await API.post(`/api/user/jobs/${id}/comments`, {content:content.value}); location.reload(); } }
+boot();
+</script>
+</body>
+</html>

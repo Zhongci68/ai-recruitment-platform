@@ -1,0 +1,10 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>职位推荐</title><link rel="stylesheet" href="/css/app.css"></head>
+<body><header class="topbar"></header>
+<main class="layout"><div id="side"></div><section class="content"><h2>职位推荐</h2><div id="list" class="grid"></div></section></main>
+<script src="/js/api.js"></script>
+<script>
+mountTopbar(); side.outerHTML = sidebar("user","recommend.html");
+API.get("/api/user/recommend").then(rows => list.innerHTML = rows.map(r => jobCard(r.job, `<span>匹配度 ${r.matchScore}%</span>`)).join(""));
+</script>
+</body>
+</html>

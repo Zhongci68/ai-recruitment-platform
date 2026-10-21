@@ -1,0 +1,49 @@
+作品文件清单
+
+说明：仅应用端/后端程序与配置文件。
+
+1. 原程序包/pom.xml
+2. 原程序包/src/main/resources/application.yml
+3. 原程序包/src/main/java/project/RecruitmentApplication.java
+4. 原程序包/src/main/java/project/config/AuthContext.java
+5. 原程序包/src/main/java/project/config/AuthInterceptor.java
+6. 原程序包/src/main/java/project/config/CurrentUser.java
+7. 原程序包/src/main/java/project/config/DataInitializer.java
+8. 原程序包/src/main/java/project/config/DemoDataEnhancer.java
+9. 原程序包/src/main/java/project/config/RequireRole.java
+10. 原程序包/src/main/java/project/config/WebConfig.java
+11. 原程序包/src/main/java/project/controller/AdminController.java
+12. 原程序包/src/main/java/project/controller/AuthController.java
+13. 原程序包/src/main/java/project/controller/PublicController.java
+14. 原程序包/src/main/java/project/controller/RecruiterController.java
+15. 原程序包/src/main/java/project/controller/UserController.java
+16. 原程序包/src/main/java/project/dto/ApiResponse.java
+17. 原程序包/src/main/java/project/entity/AdminAction.java
+18. 原程序包/src/main/java/project/entity/ApplicationRecord.java
+19. 原程序包/src/main/java/project/entity/Comment.java
+20. 原程序包/src/main/java/project/entity/Favorite.java
+21. 原程序包/src/main/java/project/entity/HotJob.java
+22. 原程序包/src/main/java/project/entity/Interview.java
+23. 原程序包/src/main/java/project/entity/Job.java
+24. 原程序包/src/main/java/project/entity/JobCategory.java
+25. 原程序包/src/main/java/project/entity/Rating.java
+26. 原程序包/src/main/java/project/entity/Resume.java
+27. 原程序包/src/main/java/project/entity/User.java
+28. 原程序包/src/main/java/project/entity/UserGroup.java
+29. 原程序包/src/main/java/project/entity/UserRole.java
+30. 原程序包/src/main/java/project/repository/AdminActionRepository.java
+31. 原程序包/src/main/java/project/repository/ApplicationRecordRepository.java
+32. 原程序包/src/main/java/project/repository/CommentRepository.java
+33. 原程序包/src/main/java/project/repository/FavoriteRepository.java
+34. 原程序包/src/main/java/project/repository/HotJobRepository.java
+35. 原程序包/src/main/java/project/repository/InterviewRepository.java
+36. 原程序包/src/main/java/project/repository/JobCategoryRepository.java
+37. 原程序包/src/main/java/project/repository/JobRepository.java
+38. 原程序包/src/main/java/project/repository/RatingRepository.java
+39. 原程序包/src/main/java/project/repository/ResumeRepository.java
+40. 原程序包/src/main/java/project/repository/UserGroupRepository.java
+41. 原程序包/src/main/java/project/repository/UserRepository.java
+42. 原程序包/src/main/java/project/service/JwtService.java
+43. 原程序包/src/main/java/project/service/NlpMatchService.java
+44. 原程序包/src/main/java/project/service/RecruitmentService.java
+45. 原程序包/src/main/java/project/service/UserService.java

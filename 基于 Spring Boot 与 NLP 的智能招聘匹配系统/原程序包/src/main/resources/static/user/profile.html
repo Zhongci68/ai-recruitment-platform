@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<header class="topbar"></header>
+<main class="layout">
+    <div id="side"></div>
+    <section class="content">
+        <h2>个人信息</h2>
+        <div class="card form-grid">
+            <input id="name" placeholder="用户名">
+            <input id="phone" placeholder="手机号">
+            <input id="education" placeholder="学历">
+            <input id="major" placeholder="专业">
+            <input id="age" type="number" placeholder="年龄">
+            <textarea id="introduction" placeholder="个人介绍"></textarea>
+            <button class="btn" onclick="save()">提交信息</button>
+        </div>
+    </section>
+</main>
+<script src="/js/app-fixed.js"></script>
+<script>mountTopbar(); side.outerHTML = sidebar("user","profile.html"); API.get("/api/user/me").then(u => { name.value=u.name||""; phone.value=u.phone||""; education.value=u.education||""; major.value=u.major||""; age.value=u.age||""; introduction.value=u.introduction||""; }); async function save(){ await API.put("/api/user/me", {name:name.value, phone:phone.value, education:education.value, major:major.value, age:Number(age.value||0), introduction:introduction.value}); alert("保存成功"); }</script>
+</body>
+</html>

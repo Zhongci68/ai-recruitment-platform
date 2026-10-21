@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>后台管理</title><link rel="stylesheet" href="/css/app.css"></head>
+<body><header class="topbar"></header><main class="layout"><div id="side"></div><section class="content"><div class="section-title"><h2 id="title"></h2><button class="btn" onclick="showAdd()">增加</button></div><div id="form" class="card hidden"></div><table class="table"><thead id="head"></thead><tbody id="rows"></tbody></table></section></main>
+<script src="/js/api.js"></script><script>
+mountTopbar(); side.outerHTML = sidebar("admin","manage.html");
+const type = new URLSearchParams(location.search).get("type") || "jobs";
+const names = {applications:"投递信息",favorites:"收藏信息",hotJobs:"热门职位",users:"用户信息",categories:"类别信息",jobs:"职位信息",ratings:"评分信息",comments:"评论信息",groups:"组"};
+title.innerText = names[type] || type;
+async function load(){ const data = await API.get("/api/admin/" + type); render(data); }
+function render(data){ head.innerHTML = "<tr><th>ID</th><th>主要信息</th><th>附加信息</th><th>操作</th></tr>"; rows.innerHTML = data.map(x => `<tr><td>${x.id}</td><td>${main(x)}</td><td>${sub(x)}</td><td><button class="btn danger" onclick="del(${x.id})">删除</button></td></tr>`).join(""); }
+function main(x){ return x.title || x.name || x.account || x.job?.title || x.content || x.status || ""; }
+function sub(x){ return x.salaryRange || x.phone || x.user?.account || x.score || fmtTime(x.createTime || x.applyTime || x.joinTime) || ""; }
+function showAdd(){ form.classList.remove("hidden"); form.innerHTML = type==="categories" ? `<input id="categoryName" placeholder="岗位名称"><br><br><button class="btn" onclick="saveCategory()">保存</button>` : type==="groups" ? `<input id="groupName" placeholder="组名称"><textarea id="groupDesc" placeholder="组说明"></textarea><button class="btn" onclick="saveGroup()">保存</button>` : type==="jobs" ? `<input id="jobTitle" placeholder="名称"><input id="salary" placeholder="薪资范围"><input id="location" placeholder="地区"><input id="education" placeholder="学历"><input id="vacancy" type="number" placeholder="岗位数量"><textarea id="desc" placeholder="介绍"></textarea><textarea id="req" placeholder="要求"></textarea><button class="btn" onclick="saveJob()">保存</button>` : `<p>该类型通常由业务流程产生，可在列表中删除或搜索。</p>`; }
+async function saveCategory(){ await API.post("/api/admin/categories", {name:categoryName.value}); load(); }
+async function saveGroup(){ await API.post("/api/admin/groups", {name:groupName.value, description:groupDesc.value}); load(); }
+async function saveJob(){ await API.post("/api/admin/jobs", {title:jobTitle.value,salaryRange:salary.value,location:location.value,education:education.value,vacancyCount:Number(vacancy.value||1),description:desc.value,requirementsText:req.value}); load(); }
+async function del(id){ await API.del(`/api/admin/${type}/${id}`); load(); }
+load();
+</script></body></html>

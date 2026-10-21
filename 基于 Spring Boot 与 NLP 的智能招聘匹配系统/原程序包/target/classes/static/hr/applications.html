@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>简历管理</title><link rel="stylesheet" href="/css/app.css"></head>
+<body><header class="topbar"></header><main class="layout"><div id="side"></div><section class="content"><h2>简历智能筛选</h2><table class="table"><thead><tr><th>职位</th><th>候选人</th><th>匹配度</th><th>状态</th><th>操作</th></tr></thead><tbody id="rows"></tbody></table></section></main>
+<script src="/js/api.js"></script><script>
+mountTopbar(); side.outerHTML = sidebar("hr","applications.html");
+async function load(){ const data=await API.get("/api/hr/applications"); rows.innerHTML=data.map(a=>`<tr><td>${a.job.title}</td><td>${a.user.name||a.user.account}</td><td>${a.matchScore}%</td><td>${a.status}</td><td><select onchange="update(${a.id},this.value)"><option>简历通过</option><option>简历未通过</option><option>面试通过</option><option>面试未通过</option><option>已发送录取通知</option></select></td></tr>`).join(""); }
+async function update(id,status){ await API.put("/api/hr/applications/"+id,{status}); load(); }
+load();
+</script></body></html>

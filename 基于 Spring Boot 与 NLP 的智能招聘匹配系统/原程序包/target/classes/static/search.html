@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>搜索结果</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<header class="topbar"></header>
+<main class="container">
+  <div class="section-title"><h2 id="title">搜索结果</h2><a href="/index.html">返回首页</a></div>
+  <div class="search-row">
+    <input id="keyword" placeholder="输入职位、技能或地区">
+    <button class="btn" onclick="search()">搜索</button>
+  </div>
+  <br>
+  <table class="table">
+    <thead><tr><th>名称</th><th>薪资范围</th><th>地区</th><th>岗位数量</th><th>学历要求</th><th>操作</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</main>
+<script src="/js/app-fixed.js"></script>
+<script>
+mountTopbar();
+const params = new URLSearchParams(location.search);
+keyword.value = params.get("keyword") || "";
+async function search() {
+  const key = keyword.value.trim();
+  title.innerText = key ? `“${key}”的搜索结果` : "全部职位";
+  const list = await API.get("/api/public/jobs?keyword=" + encodeURIComponent(key));
+  rows.innerHTML = list.map(jobRow).join("") || `<tr><td colspan="6">暂无匹配职位</td></tr>`;
+}
+search();
+</script>
+</body>
+</html>

@@ -1,6 +1,0 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>我的评分</title><link rel="stylesheet" href="/css/app.css"></head>
-<body><header class="topbar"></header><main class="layout"><div id="side"></div><section class="content"><h2>我的评分</h2><table class="table"><thead><tr><th>职位名称</th><th>薪资范围</th><th>分数</th><th>评分时间</th><th>详情</th></tr></thead><tbody id="rows"></tbody></table></section></main>
-<script src="/js/api.js"></script><script>
-mountTopbar(); side.outerHTML = sidebar("user","ratings.html");
-API.get("/api/user/ratings").then(data => rows.innerHTML = data.map(r => `<tr><td>${r.job.title}</td><td>${money(r.job)}</td><td>${r.score}</td><td>${fmtTime(r.createTime)}</td><td><a href="/detail.html?id=${r.job.id}">查看详情</a></td></tr>`).join(""));
-</script></body></html>

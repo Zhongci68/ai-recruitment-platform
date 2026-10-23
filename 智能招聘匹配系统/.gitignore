@@ -1,0 +1,23 @@
+# Maven build output
+target/
+
+# IntelliJ IDEA and Eclipse
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Runtime logs
+*.log
+logs/
+
+# H2 local database and temporary files
+data/*.mv.db
+data/*.trace.db
+data/*.lock.db
+data/*.temp.db
+
+# Operating system files
+.DS_Store
+Thumbs.db

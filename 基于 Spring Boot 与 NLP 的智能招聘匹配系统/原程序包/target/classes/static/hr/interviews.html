@@ -1,8 +1,0 @@
-﻿<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>面试安排</title><link rel="stylesheet" href="/css/app.css"></head>
-<body><header class="topbar"></header><main class="layout"><div id="side"></div><section class="content"><h2>面试安排</h2><div class="card form-grid"><input id="applicationId" placeholder="投递ID"><input id="interviewTime" type="datetime-local"><input id="mode" placeholder="面试方式，如线上面试"><input id="location" placeholder="地点/会议链接"><textarea id="remark" placeholder="备注"></textarea><button class="btn" onclick="save()">发送面试邀请</button></div><h3>已安排面试</h3><table class="table"><thead><tr><th>候选人</th><th>时间</th><th>方式</th><th>地点</th><th>状态</th><th>备注</th></tr></thead><tbody id="rows"></tbody></table></section></main>
-<script src="/js/app-fixed.js"></script><script>
-mountTopbar(); side.outerHTML = sidebar("hr","interviews.html");
-async function load(){ const data=await API.get("/api/hr/interviews"); rows.innerHTML=data.map(i=>`<tr><td>${i.candidate?.name||""}</td><td>${fmtTime(i.interviewTime)}</td><td>${i.mode}</td><td>${i.location}</td><td>${i.status}</td><td>${i.remark||""}</td></tr>`).join(""); }
-async function save(){ await API.post("/api/hr/interviews", {application:{id:Number(applicationId.value)},interviewTime:interviewTime.value,mode:mode.value,location:location.value,remark:remark.value,status:"待确认"}); alert("面试邀请已发送，求职者投递状态已更新为等待面试"); load(); }
-load();
-</script></body></html>

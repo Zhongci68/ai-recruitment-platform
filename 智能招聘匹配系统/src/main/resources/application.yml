@@ -1,0 +1,42 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: smart-recruitment-system
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  jwt-secret: "${APP_JWT_SECRET:codex-help-smart-recruitment-secret-change-in-production}"
+  jwt-expire-hours: 8
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: "${H2_URL:jdbc:h2:file:./data/recruitment;MODE=MySQL;DATABASE_TO_LOWER=TRUE}"
+    driver-class-name: org.h2.Driver
+    username: "${H2_USERNAME:sa}"
+    password: "${H2_PASSWORD:}"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  datasource:
+    url: "jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:smart_recruitment}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai"
+    username: "${MYSQL_USERNAME:root}"
+    password: "${MYSQL_PASSWORD:}"
+    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,0 +1,40 @@
+作品文件清单
+
+项目名称：基于 Spring Boot 与 NLP 的智能招聘匹配系统
+项目类型：Java 17、Spring Boot 3.3.5、Maven Web 应用
+
+一、项目根目录文件
+
+1. 学号_姓名_智能招聘匹配系统/pom.xml
+2. 学号_姓名_智能招聘匹配系统/README.md
+3. 学号_姓名_智能招聘匹配系统/作品文件清单.txt
+4. 学号_姓名_智能招聘匹配系统/.gitignore
+
+二、程序源代码
+
+1. 学号_姓名_智能招聘匹配系统/src/main/java/project/RecruitmentApplication.java
+2. 学号_姓名_智能招聘匹配系统/src/main/java/project/config/
+3. 学号_姓名_智能招聘匹配系统/src/main/java/project/controller/
+4. 学号_姓名_智能招聘匹配系统/src/main/java/project/dto/
+5. 学号_姓名_智能招聘匹配系统/src/main/java/project/entity/
+6. 学号_姓名_智能招聘匹配系统/src/main/java/project/repository/
+7. 学号_姓名_智能招聘匹配系统/src/main/java/project/service/
+
+三、配置文件与前端资源
+
+1. 学号_姓名_智能招聘匹配系统/src/main/resources/application.yml
+2. 学号_姓名_智能招聘匹配系统/src/main/resources/static/
+
+四、数据库文件
+
+1. 学号_姓名_智能招聘匹配系统/data/recruitment.mv.db
+
+五、说明文档
+
+1. 学号_姓名_智能招聘匹配系统/docs/环境配置与运行说明.md
+2. 学号_姓名_智能招聘匹配系统/docs/数据库说明.md
+
+说明：
+1. 默认使用 data 目录下的 H2 文件数据库，首次启动自动建表并初始化演示数据。
+2. 可选 MySQL 配置，数据库创建 SQL 和连接说明见 docs/数据库说明.md。
+3. target、.idea、.git 等构建或编辑器生成内容不放入课程提交压缩包。

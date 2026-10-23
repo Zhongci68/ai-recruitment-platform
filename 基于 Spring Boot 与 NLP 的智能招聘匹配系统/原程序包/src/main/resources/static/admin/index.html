@@ -1,6 +1,0 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>管理员后台</title><link rel="stylesheet" href="/css/app.css"><script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script></head>
-<body><header class="topbar"></header><main class="layout"><div id="side"></div><section class="content"><h2>数据分析仪表盘</h2><div id="stats" class="stats"></div><div class="card"><div id="chart" class="chart"></div></div><h3>浏览排行</h3><table class="table"><tbody id="rank"></tbody></table></section></main>
-<script src="/js/api.js"></script><script>
-mountTopbar(); side.outerHTML = sidebar("admin","index.html");
-API.get("/api/admin/dashboard").then(d => { stats.innerHTML = [["用户",d.userCount],["职位",d.jobCount],["投递",d.applicationCount],["收藏",d.favoriteCount]].map(s=>`<div class="card stat">${s[0]}<strong>${s[1]}</strong></div>`).join(""); rank.innerHTML = d.rank.map(j=>`<tr><td>${j.title}</td><td>${j.location}</td><td>${j.viewCount}</td></tr>`).join(""); echarts.init(chart).setOption({xAxis:{type:"category",data:["周一","周二","周三","周四","周五","周六","周日"]},yAxis:{type:"value"},series:[{type:"line",smooth:true,data:d.trend}]}); });
-</script></body></html>

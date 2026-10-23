@@ -136,9 +136,3 @@ java -jar target/smart-recruitment-system-1.0.0.jar
 
 停止应用后，删除 `data/recruitment.mv.db`，再次启动时会重新建表并生成
 演示数据。若需要保留已有用户、岗位和投递数据，请不要删除数据库文件。
-
-## 提交说明
-
-课程提交包应包含 `src`、`pom.xml`、配置文件和说明文档，不包含 `target`、
-`.idea` 等构建或编辑器生成文件。GitHub 仓库应从本目录初始化，使其根目录
-直接包含 `README.md`、`pom.xml` 和 `src`。
